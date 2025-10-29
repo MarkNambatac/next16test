@@ -29,7 +29,6 @@ const EventSchema = new Schema<IEvent>(
     },
     slug: {
       type: String,
-      unique: true,
       lowercase: true,
       trim: true,
     },
@@ -143,8 +142,8 @@ EventSchema.pre('save', function (next) {
   next();
 });
 
-// Add index for faster slug lookups
-EventSchema.index({ slug: 1 });
+// Add unique index for slug lookups
+EventSchema.index({ slug: 1 }, { unique: true });
 
 // Prevent model recompilation in development (Next.js hot reload)
 const Event = models.Event || model<IEvent>('Event', EventSchema);
