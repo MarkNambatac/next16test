@@ -31,10 +31,11 @@ if (!global.mongoose) {
 }
 
 /**
- * Establishes a connection to MongoDB using Mongoose.
- * Caches the connection to reuse across function calls.
- * 
- * @returns Promise resolving to the Mongoose instance
+ * Establishes and caches a Mongoose connection to the configured MongoDB URI.
+ *
+ * Caches the connection across calls to reuse the same connection and avoid creating multiple connections.
+ *
+ * @returns The connected Mongoose instance
  */
 async function dbConnect(): Promise<typeof mongoose> {
   // Return existing connection if available
